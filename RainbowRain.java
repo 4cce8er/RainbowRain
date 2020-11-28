@@ -1,4 +1,4 @@
-package rainbowRain;
+package rainbowrain;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -11,7 +11,7 @@ class Parameters{
 	public static int rainNumber = 50;
 	public static boolean color = true;
 	public static boolean random = false;
-	public static String customStr = "Click 修改 after inputing new string";
+	public static String customStr = "Click \'yes\' after inputing a new string";
 	
 	public int getRainNumber() {
 		return rainNumber;
@@ -57,7 +57,7 @@ class Rain extends Thread{
 			try{
 				sleep(30);
 			}catch(InterruptedException e) {
-				System.err.println("Threa interrupted");
+				System.err.println("Thread interrupted");
 			}
 			canvas.repaint();
 			
@@ -78,7 +78,7 @@ class Rain extends Thread{
 		}
 	}
 	public void draw(Graphics g) {
-		Font f1 = new Font("微软雅黑", Font.PLAIN, size);
+		Font f1 = new Font("Courier", Font.PLAIN, size);
 		g.setFont(f1);
 		
 		String[] strSplit= content.split("");
@@ -115,7 +115,7 @@ class MainFrame extends Frame{
 		setSize(Parameters.sSize.width/2, Parameters.sSize.height/2);
 		setLocation(Parameters.sSize.width/4, Parameters.sSize.height/4);
 		
-		Button start = new Button("开始下雨！");
+		Button start = new Button("Start Raining!");
 		
 		start.addActionListener(new ActionListener() {
 			@Override
@@ -132,9 +132,9 @@ class MainFrame extends Frame{
 		settingPanel.setLayout(new GridLayout(4, 1));
 
 		Panel subPanelA = new Panel();
-		Label rainNumberLabel = new Label("雨势大小：");
+		Label rainNumberLabel = new Label("How heavy you want it: ");
 		TextField rainNumberField = new TextField(20);
-		Button setRainNumber = new Button("修改");
+		Button setRainNumber = new Button("yes");
 		subPanelA.add(rainNumberLabel);
 		subPanelA.add(rainNumberField);
 		subPanelA.add(setRainNumber);
@@ -145,15 +145,15 @@ class MainFrame extends Frame{
 				try {
 					Parameters.rainNumber  = Integer.parseInt(rainNumberField.getText());
 				}catch(Exception exc) {
-					rainNumberField.setText("请输入正确的数字！");
+					rainNumberField.setText("Input a legal number!");
 				}
 			}
 		});
 		
 		Panel subPanelB = new Panel();
-		Label colorModeLabel = new Label("色彩模式：");
-		JRadioButton colorFalse = new JRadioButton("黑客帝国");
-		JRadioButton colorTrue = new JRadioButton("彩虹模式");
+		Label colorModeLabel = new Label("Color Mode: ");
+		JRadioButton colorFalse = new JRadioButton("MATRIX");
+		JRadioButton colorTrue = new JRadioButton("Rainbow Rain");
 		ButtonGroup bg = new ButtonGroup();
 		bg.add(colorFalse);
 		bg.add(colorTrue);
@@ -175,11 +175,11 @@ class MainFrame extends Frame{
 		subPanelB.add(colorTrue);
 		
 		Panel subPanelC = new Panel();
-		Label customLabel = new Label("文字模式: ");
-		JRadioButton customFalse = new JRadioButton("随机字符");
-		JRadioButton customTrue = new JRadioButton("自定义文字");
+		Label customLabel = new Label("Characters: ");
+		JRadioButton customFalse = new JRadioButton("Random");
+		JRadioButton customTrue = new JRadioButton("Use this: ");
 		TextField customContent = new TextField(30);
-		Button setCustomStr = new Button("修改");
+		Button setCustomStr = new Button("yes");
 		customContent.setEnabled(true);
 		customContent.setText(Parameters.customStr);
 		ButtonGroup bgC = new ButtonGroup();
